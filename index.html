@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ru">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Имена Аллаха</title>
+<style>
+:root{color-scheme:light;--ink:#17382f;--green:#17483e;--muted:#4d665d;--paper:#f6f5ee;--line:#d5dfd6;--gold:#dbb878}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,sans-serif}button,input{font:inherit}button{cursor:pointer}a{color:var(--green);text-underline-offset:4px}header,main,footer{width:min(1100px,calc(100% - 36px));margin:auto}header{padding:22px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}header strong{letter-spacing:.03em}nav,.actions,.sources{display:flex;gap:9px;flex-wrap:wrap}button{border:1px solid var(--line);border-radius:9px;padding:9px 15px;color:var(--ink);background:white}button:hover{border-color:var(--green)}button[aria-pressed=true],.primary{background:var(--green);border-color:var(--green);color:white}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #a26a20;outline-offset:3px}.hero{position:relative;overflow:hidden;isolation:isolate;background:#103d34;color:#fff;border-radius:22px;padding:clamp(24px,5vw,64px);display:grid;grid-template-columns:1fr minmax(175px,36%);align-items:center;gap:20px}.hero:after{content:"";position:absolute;z-index:-1;inset:0;background:repeating-linear-gradient(45deg,transparent 0 29px,#ffffff0b 30px 31px,transparent 32px 60px),repeating-linear-gradient(-45deg,transparent 0 29px,#ffffff0b 30px 31px,transparent 32px 60px);mask-image:linear-gradient(to right,transparent 25%,black)}h1,h2,h3,p{margin-top:0}h1,h2,h3{line-height:1.15}h1{font:clamp(2.65rem,7vw,5rem)/1 Georgia,serif;margin-bottom:16px}h2{font:2rem/1.12 Georgia,serif;margin-bottom:12px}.hero p{color:#e0eee5;max-width:430px}.arabic{font-family:"Noto Naskh Arabic","Traditional Arabic",serif}.hero .arabic{color:#efd9a8;text-align:center;font-size:clamp(2.5rem,6.4vw,5.6rem);line-height:1.3}.track{margin-top:24px;max-width:350px;color:#fff}progress{display:block;width:100%;height:9px;margin-top:7px;accent-color:var(--gold)}.section{margin-top:30px}.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0}.toolbar input{flex:1;min-width:min(250px,100%);padding:9px 14px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--ink)}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(225px,100%),1fr));gap:14px}.card{display:block;text-align:left;padding:19px;background:#fffefa;border-radius:14px;min-height:145px}.card .arabic{display:block;font-size:2.35rem;color:var(--green);margin-bottom:8px}.card strong{display:block}.muted{color:var(--muted)}.card small{font-size:.88rem}.panel{border:1px solid var(--line);border-radius:16px;background:#fffefa;padding:clamp(18px,4vw,34px);max-width:780px}.detail-title{font-size:3rem;color:var(--green);margin-bottom:0}.story{background:#edf3ec;padding:18px;border-radius:10px;margin:20px 0}.story h3{margin-bottom:7px}.story p:last-child{margin-bottom:0}.sources{margin:12px 0 20px}.sources a{padding:4px 0;margin-right:10px}.answers{display:grid;gap:9px;margin:15px 0}.answers button{text-align:left}.answers .correct{background:#dcefe1;border-color:#307548}.answers .wrong{background:#f8e5df;border-color:#9d4c38}.feedback{min-height:1.55em}.section>button{margin-bottom:14px}footer{padding:30px 0;color:var(--muted);font-size:.9rem}@media(max-width:570px){.hero{grid-template-columns:1fr}.hero .arabic{text-align:left;grid-row:1}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card{padding:13px}.card .arabic{font-size:1.8rem}}@media(max-width:345px){.grid{grid-template-columns:1fr}}
+</style>
+<header><strong>Имена Аллаха</strong><nav aria-label="Разделы"><button id="learn">Карточки</button><button id="practice">Тренировка</button></nav></header>
+<main><section class="hero"><div><h1>Имена Аллаха</h1><p>Читайте о смысле имён, вспоминайте истории из Корана и хадисов и проверяйте себя.</p><div class="track"><span id="progress-label"></span><progress id="progress" aria-labelledby="progress-label"></progress></div></div><div class="arabic" dir="rtl" lang="ar">الأَسْمَاءُ الْحُسْنَىٰ</div></section><section id="view" class="section" aria-label="Учебный раздел"></section></main>
+<footer>Русские значения даны кратко. Истории и пояснения изложены своими словами. Одни и те же события могут раскрывать значение нескольких имён.</footer>
+<script src="collection.js"></script>
+<script>
+const initialNames = [{"name": "Ар-Рахман", "id": 0}, {"name": "Ар-Рахим", "id": 1}, {"name": "Аль-Гафур", "id": 2}, {"name": "Аль-Гаффар", "id": 3}, {"name": "Ат-Тавваб", "id": 4}, {"name": "Ас-Сами‘", "id": 5}, {"name": "Аль-Басыр", "id": 6}, {"name": "Аль-‘Алим", "id": 7}, {"name": "Ар-Раззак", "id": 8}, {"name": "Аль-Муджиб", "id": 9}, {"name": "Аль-Вадуд", "id": 10}, {"name": "Аль-Вакиль", "id": 11}, {"name": "Аль-Латыф", "id": 12}, {"name": "Аль-Ваххаб", "id": 13}, {"name": "Аль-Хаким", "id": 14}, {"name": "Аль-Кадир", "id": 15}];
+const names = buildCollection(initialNames);
+const namesById = new Map(names.map(n => [n.id,n]));
+</script>
+<script>
+const byId = id => document.getElementById(id);
+const view = byId('view');
+let saved = {};
+try { saved = JSON.parse(localStorage.getItem('asma-study-v1') || '{}') || {}; } catch {}
+const learned = new Set(Array.isArray(saved.learned) ? saved.learned : []);
+const review = new Set(Array.isArray(saved.review) ? saved.review : []);
+let filter = 'all', search = '';
+function refreshProgress() {
+  byId('progress-label').textContent = 'Изучено ' + learned.size + ' из ' + names.length;
+  byId('progress').max = names.length;
+  byId('progress').value = learned.size;
+}
+function save() {
+  try { localStorage.setItem('asma-study-v1', JSON.stringify({learned:[...learned],review:[...review]})); } catch {}
+  refreshProgress();
+}
+function section(mode, html, focus = true) {
+  view.innerHTML = html;
+  byId('learn').setAttribute('aria-pressed', mode === 'learn');
+  byId('practice').setAttribute('aria-pressed', mode === 'practice');
+  if (focus) {
+    const heading = view.querySelector('h2');
+    heading.tabIndex = -1;
+    heading.focus();
+  }
+}
+const arabic = n => '<span class="arabic" lang="ar" dir="rtl">' + n.arabic + '</span>';
+function catalog(focus = true) {
+  section('learn','<h2>Карточки имён</h2><details><summary>О списке 99 имён и источниках</summary><p>Приложение использует распространённый порядок от имени Аллах до Ас-Сабур. Достоверный хадис сообщает о 99 именах. Их перечисление в распространённой версии ат-Тирмизи имеет слабую оценку. Поэтому карточки показывают, как имя или его смысл связан с источником. Для некоторых имён приведены тематически близкие аяты и хадисы.</p><div class="sources"><a href="https://sunnah.com/bukhari:2736">Сахих аль-Бухари 2736</a><a href="https://sunnah.com/muslim:2677a">Сахих Муслим 2677a</a><a href="https://sunnah.com/tirmidhi:3507">Ат-Тирмизи 3507</a></div></details><div class="toolbar"><input id="search" type="search" placeholder="Имя или значение" aria-label="Найти имя"><div class="actions"><button data-filter="all">Все</button><button data-filter="review">На повторение</button></div></div><div id="cards" class="grid"></div>',focus);
+  const input = byId('search');
+  input.value = search;
+  input.oninput = () => { search = input.value; updateCards(); };
+  view.querySelectorAll('[data-filter]').forEach(button => {
+    button.onclick = () => { filter = button.dataset.filter; updateCards(); };
+  });
+  updateCards();
+}
+function normalize(value) {
+  return value.toLowerCase().replace(/[\u064B-\u065F\u0670‘’'\s-]/g,'').replaceAll('ё','е');
+}
+function updateCards() {
+  view.querySelectorAll('[data-filter]').forEach(button => button.setAttribute('aria-pressed',button.dataset.filter === filter));
+  const matches = names.filter(n => (filter === 'all' || review.has(n.id)) && normalize(n.name + n.meaning + n.arabic).includes(normalize(search)));
+  const cards = byId('cards');
+  cards.innerHTML = matches.map(n => '<button class="card" data-id="' + n.id + '">' + arabic(n) + '<strong>' + n.name + '</strong><span>' + n.meaning + '</span>' + (learned.has(n.id) ? '<br><small class="muted">Изучено</small>' : '') + '</button>').join('') || '<p>' + (search ? 'Ничего не найдено.' : 'Здесь появятся имена, которые вы добавите на повторение.') + '</p>';
+  cards.querySelectorAll('button').forEach(button => button.onclick = () => details(namesById.get(Number(button.dataset.id))));
+}
+function details(n) {
+  section('learn','<button id="back">К карточкам</button><article class="panel"><div class="detail-title">' + arabic(n) + '</div><h2>' + n.name + '</h2><h3>' + n.meaning + '</h3><p class="muted">' + n.label + '</p><div class="story"><h3>' + n.title + '</h3><p>' + n.story + '</p></div><h3>Связь с именем</h3><p>' + n.explanation + '</p>' + (n.tafsir ? '<h3>Пояснение из тафсира</h3><p>' + n.tafsir + '</p>' : '') + '<h3>Источники</h3><div class="sources">' + n.sources.map(([label,url]) => '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + label + '</a>').join('') + '</div><details><summary>Вопрос для самопроверки</summary><p>' + n.prompt + '</p><p class="muted">Ответ можно сверить с историей выше.</p></details><div class="actions" style="margin-top:20px"><button id="mastered"></button><button id="review"></button></div></article>');
+  byId('back').onclick = () => catalog();
+  function toggle(id, set, active, inactive) {
+    const button = byId(id);
+    const update = () => {
+      button.setAttribute('aria-pressed',set.has(n.id));
+      button.textContent = set.has(n.id) ? active : inactive;
+    };
+    button.onclick = () => { if (set.has(n.id)) set.delete(n.id); else set.add(n.id); save(); update(); };
+    update();
+  }
+  toggle('mastered',learned,'Изучено','Отметить изученным');
+  toggle('review',review,'В списке повторения','Добавить на повторение');
+}
+function shuffle(items) {
+  const result = [...items];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i],result[j]] = [result[j],result[i]];
+  }
+  return result;
+}
+function practice() {
+  section('practice','<h2>Тренировка</h2><div class="panel"><p>Вспомните перевод имени или узнайте имя по эпизоду. Если ошибётесь, карточка добавится на повторение.</p><div class="actions"><button id="all-test" class="primary">Все имена</button><button id="review-test">На повторение (' + review.size + ')</button></div></div>');
+  byId('all-test').onclick = () => start(names);
+  byId('review-test').disabled = !review.size;
+  byId('review-test').onclick = () => start(names.filter(n => review.has(n.id)));
+}
+function start(pool) {
+  const questions = shuffle(pool).slice(0,8);
+  let score = 0;
+  function show(index) {
+    if (index === questions.length) {
+      section('practice','<h2>Результат тренировки</h2><div class="panel"><p>Верных ответов: <strong>' + score + ' из ' + questions.length + '</strong>.</p><div class="actions"><button id="again" class="primary">Новая тренировка</button><button id="to-review">Карточки на повторение</button></div></div>');
+      byId('again').onclick = practice;
+      byId('to-review').onclick = () => { search = ''; filter = 'review'; catalog(); };
+      return;
+    }
+    const name = questions[index];
+    const storyMode = index % 2 === 1;
+    const options = shuffle([name,...shuffle(names.filter(n=>n.id !== name.id && (storyMode ? n.key !== name.key : n.meaning !== name.meaning))).slice(0,3)]);
+    section('practice','<h2>Вопрос ' + (index + 1) + ' из ' + questions.length + '</h2><div class="panel">' + (storyMode ? '<h3>Какое имя изучали на примере этого эпизода?</h3><p>' + name.title + '</p>' : '<h3>Как переводится ' + name.name + '?</h3><div class="detail-title">' + arabic(name) + '</div>') + '<div class="answers">' + options.map(n=>'<button data-answer="' + n.id + '">' + (storyMode ? n.name : n.meaning) + '</button>').join('') + '</div><p class="feedback" role="status" id="feedback"></p><button class="primary" id="next" hidden>' + (index + 1 === questions.length ? 'Посмотреть результат' : 'Следующий вопрос') + '</button></div>');
+    const answers = view.querySelectorAll('[data-answer]');
+    answers.forEach(button => button.onclick = () => {
+      const correct = Number(button.dataset.answer) === name.id;
+      if (correct) score++;
+      else { review.add(name.id); save(); button.classList.add('wrong'); }
+      answers.forEach(answer => {
+        answer.disabled = true;
+        if (Number(answer.dataset.answer) === name.id) answer.classList.add('correct');
+      });
+      byId('feedback').textContent = (correct ? 'Верно. ' : 'Карточка добавлена на повторение. ') + name.name + ' — ' + name.meaning + '.';
+      byId('next').hidden = false;
+      byId('next').focus();
+    });
+    byId('next').onclick = () => show(index+1);
+  }
+  show(0);
+}
+byId('learn').onclick = () => catalog();
+byId('practice').onclick = practice;
+refreshProgress();
+catalog(false);
+</script>
+</html>
